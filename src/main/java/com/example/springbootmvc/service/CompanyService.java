@@ -22,7 +22,9 @@ public class CompanyService {
 
     public Company getInfo(Integer id) {
         Optional<Company> optionalCompany = companyRepository.findById(id);
-        return optionalCompany.get();
+        Company company = optionalCompany.get();
+        CompanyController.idd = company.getId();
+        return company;
     }
     public ApiResponse saveUpdatedInfo(Company company){
         companyRepository.deleteById(CompanyController.idd);

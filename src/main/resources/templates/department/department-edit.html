@@ -9,11 +9,21 @@
 <body>
 <h1>Company Edit Page</h1>
 <!--/*@thymesVar id="product" type="pdp"*/-->
-<form method="post" action="/company/update/">
+<form method="post" action="/department/update/">
     <div class="form-group">
         <label for="ketmon">Maker</label>
         <input name="name" type="text" class="form-control" id="ketmon"
-               placeholder="Company name kirit" th:value="${info.name}">
+               placeholder="Department name kirit" th:value="${info.name}">
+    </div>
+    <div>
+        <label> Company </label>
+        <div>
+            <select name="companyId">
+                <option th:each="company : ${companyList}"
+                        th:text="${company.name}"
+                        th:value="${company.id}">
+            </select>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>

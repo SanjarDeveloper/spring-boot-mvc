@@ -1,6 +1,7 @@
 package com.example.springbootmvc.controller;
 
 import com.example.springbootmvc.dto.DepartmentDTO;
+import com.example.springbootmvc.entity.Company;
 import com.example.springbootmvc.entity.Department;
 import com.example.springbootmvc.repository.CompanyRepository;
 import com.example.springbootmvc.repository.DepartmentRepository;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
-
+    public static Integer idd = null;
     @Autowired
     DepartmentService departmentService;
     @Autowired
@@ -50,6 +51,18 @@ public class DepartmentController {
     @GetMapping("/delete/{id}") //1 45 24 90
     public String delete(@PathVariable Integer id) {
         departmentRepository.deleteById(id);
-        return "redirect:/employee";
+        return "redirect:/department";
+    }
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        idd = id;
+        model.addAttribute("companyList",companyRepository.findAll());
+        model.addAttribute("info",departmentService.getInfo(id));
+        return "department/department-edit";
+    }
+    @PostMapping("/update")
+    public String saveUpdatedInfo(@ModelAttribute DepartmentDTO departmentDTO){
+        departmentService.saveUpdatedInfo(departmentDTO);
+        return "redirect:/department";
     }
 }

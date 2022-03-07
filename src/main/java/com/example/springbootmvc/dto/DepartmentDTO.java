@@ -11,4 +11,5 @@ public class DepartmentDTO {
 
     private String name;
     private Integer companyId;
+
 }

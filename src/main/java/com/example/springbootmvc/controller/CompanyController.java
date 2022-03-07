@@ -47,14 +47,15 @@ public static Integer idd = null;
         companyRepository.deleteById(id);
         return "redirect:/company";
     }
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
-        model.addAttribute("info",companyService.getInfo(id));
         idd = id;
+        model.addAttribute("idd", idd);
+        model.addAttribute("info",companyService.getInfo(id));
         return "company/company-edit";
     }
     @PostMapping("/update")
-    public String saveUpdatedInfo(Model model, @ModelAttribute Company company){
+    public String saveUpdatedInfo(@ModelAttribute Company company){
         companyService.saveUpdatedInfo(company);
         return "redirect:/company";
     }
