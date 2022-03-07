@@ -53,13 +53,15 @@ public class DepartmentController {
         departmentRepository.deleteById(id);
         return "redirect:/department";
     }
-    @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
-        idd = id;
-        model.addAttribute("companyList",companyRepository.findAll());
-        model.addAttribute("info",departmentService.getInfo(id));
-        return "department/department-edit";
-    }
+//    @GetMapping("/edit/{id}") My method
+//    public String edit(@PathVariable Integer id, Model model){
+//        idd = id;
+//        model.addAttribute("companyList",companyRepository.findAll());
+//        model.addAttribute("info",departmentService.getInfo(id));
+//        return "department/department-edit";
+//    }
+
+    
     @PostMapping("/update")
     public String saveUpdatedInfo(@ModelAttribute DepartmentDTO departmentDTO){
         departmentService.saveUpdatedInfo(departmentDTO);

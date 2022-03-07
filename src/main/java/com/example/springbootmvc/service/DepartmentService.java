@@ -48,11 +48,11 @@ public class DepartmentService {
     public ApiResponse saveUpdatedInfo(DepartmentDTO departmentDTO) {
         Optional<Company> optionalCompany = companyRepository.findById(departmentDTO.getCompanyId());
         if (optionalCompany.isEmpty()) return new ApiResponse("Bunaqa id yoq", false);
-        Optional<Department> companyID = departmentRepository.findById(optionalCompany.get().getId());
+        Optional<Department> optionalDepartment = departmentRepository.findById(departmentDTO.getCompanyId());
 //        departmentRepository.deleteById();
         //        departmentRepository.deleteById(companyID.get().getId());
         Company company = optionalCompany.get();
-        Department department = new Department();
+        Department department = optionalDepartment.get();
         department.setName(departmentDTO.getName());
         department.setCompany(company);
         Department save = departmentRepository.save(department);
