@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/company")
 public class CompanyController {
-
+public static Integer idd = null;
     @Autowired
     CompanyService companyService;
     @Autowired
@@ -30,8 +32,8 @@ public class CompanyController {
 
     @GetMapping("/add")
 //    @RequestMapping(path = "/add", method = RequestMethod.GET)
-    public String getSavecompany() {
-
+    public String getSavecompany(Model model) {
+        model.addAttribute("list",companyRepository.findAll());
         return "company/company-add";
     }
 
@@ -43,7 +45,17 @@ public class CompanyController {
     @GetMapping("/delete/{id}") //1 45 24 90
     public String delete(@PathVariable Integer id) {
         companyRepository.deleteById(id);
-        return "redirect:/employee";
+        return "redirect:/company";
     }
-
+    @GetMapping("edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("info",companyService.getInfo(id));
+        idd = id;
+        return "company/company-edit";
+    }
+    @PostMapping("/update")
+    public String saveUpdatedInfo(Model model, @ModelAttribute Company company){
+        companyService.saveUpdatedInfo(company);
+        return "redirect:/company";
+    }
 }
