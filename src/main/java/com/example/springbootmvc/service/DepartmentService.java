@@ -27,7 +27,7 @@ public class DepartmentService {
 
     public ApiResponse add(DepartmentDTO departmentDTO) {
         Optional<Company> optionalCompany = companyRepository.findById(departmentDTO.getCompanyId());
-        if (optionalCompany.isEmpty()) return new ApiResponse("Akaajon bunaqa id yoq", false);
+        if (optionalCompany.isPresent()) return new ApiResponse("Akaajon bunaqa id yoq", false);
         Company company = optionalCompany.get();
 
         Department department = new Department();
@@ -47,7 +47,7 @@ public class DepartmentService {
 
     public ApiResponse saveUpdatedInfo(DepartmentDTO departmentDTO) {
         Optional<Company> optionalCompany = companyRepository.findById(departmentDTO.getCompanyId());
-        if (optionalCompany.isEmpty()) return new ApiResponse("Bunaqa id yoq", false);
+        if (optionalCompany.isPresent()) return new ApiResponse("Bunaqa id yoq", false);
         Optional<Department> optionalDepartment = departmentRepository.findById(departmentDTO.getCompanyId());
 //        departmentRepository.deleteById();
         //        departmentRepository.deleteById(companyID.get().getId());

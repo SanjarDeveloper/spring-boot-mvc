@@ -27,7 +27,7 @@ public class EmployeeService {
 
     public ApiResponse add(EmployeeDTO employeeDTO) {
         Optional<Department> optionalDepartment = departmentRepository.findById(employeeDTO.getDepartmentId());
-        if (optionalDepartment.isEmpty()) return new ApiResponse("bunaqa id yoq", false);
+        if (optionalDepartment.isPresent()) return new ApiResponse("bunaqa id yoq", false);
         Department department = optionalDepartment.get();
 
         Employee employee = new Employee();
